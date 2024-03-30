@@ -11,15 +11,14 @@
 #include "Base64.h"
 
 
-#define CHANNEL 0 //Canal dedicado a la visualización de video vía rtsp 
-#define CHANNELNN 3 //Canal dedicado a la detección de objetos
-#define CHANNEL_MP4 2 //Canal dedicaco al almacenamiento de video en tarjeta micro SD
-#define CHANNEL_MP4_2 1 //Canal #2 dedicaco al almacenamiento de video en tarjeta micro SD
-
+#define CHANNEL 0 //Channel dedicated to video viewing via RTSP
+#define CHANNELNN 3 //Channel dedicated to object detection
+#define CHANNEL_MP4 2 //Channel dedicated to video storage on micro SD card
+#define CHANNEL_MP4_2 1 //Channel #2 dedicated to video storage on micro SD card
 //-----------------------------IFTTT--------------------------------------------
-#define FILENAME    "image.jpg" // Nombre del archivo imágen que se capturará en el momento de una infracción de velocidad
+#define FILENAME    "image.jpg" // Name of the image file that is captured at the time of a speed violation
 
-// Enter your Google Script and details
+//Google Script and details
 String myScript = "/macros/s/AKfycbyx-J0RdD4Hn9_6VCMBSLGRadrcWfW4jjcWy1pNSFDcH8AFjRDMum7kYvm0CPQNfTme/exec";  // Create your Google Apps Script and replace the "myScript" path.
 String myFoldername = "&myFoldername=AMB82";  // Set the Google Drive folder name to store your file
 String myFilename = "&myFilename=image.jpg";  // Set the Google Drive file name to store your data
@@ -41,7 +40,7 @@ char *p;
 #define GREEN_LED LED_G
 #define BLUE_LED LED_B
 
-//------------------------------Configuraciones de video-----------------------------------
+//------------------------------Video settings-----------------------------------
 
 VideoSetting config(VIDEO_D1, CAM_FPS, VIDEO_H264_JPEG, 1);  // High resolution video for streaming
 VideoSetting configNN(VIDEO_VGA, 10, VIDEO_RGB, 0);
@@ -55,83 +54,78 @@ StreamIO videoStreamerMP4(1, 1);
 StreamIO videoStreamerMP4_2(1, 1);
 extern VideoStreamOverlay OSD;
 
-//-------------------------Asignación de red WIFI---------------------------------------------
-char ssid[] = "ARLEN_TERRAZA";   // your network SSID (name)
-char pass[] = "yoamolacarranga";       // your network password
+//-------------------------WIFI network assignment---------------------------------------------
+char ssid[] = "SSID";   // your network SSID (name)
+char pass[] = "password";       // your network password
 int status = WL_IDLE_STATUS;
 
 IPAddress ip;
 int rtsp_portnum;
 
 
-//--Coordenadas iniciales de la líneas guía para medición de velocidad------
+//--Initial coordinates of the guide lines for speed measurement------
 // Line coordinates
 int line1_x1 = 75;
 int line1_y1 = 75;
 int line2_x2 = 220;
 int line2_y2 = 220;
 
-//-----------------------------Variables para el cálculo de velocidad---------------------------------------
+//-----------------------------Variables for speed calculation---------------------------------------
 unsigned long startTime = 0;
 unsigned long endTime = 0;
-float distanceBetweenLines = 15; // Distancia entre las líneas en metros------------------------------------(AJUSTAR SEGÚN SEA NECESARIO)
-float speedx = 0.0; // Velocidad calculada en km/h
-bool timingStarted = false; // Bandera para indicar si se inició el temporizador
+float distanceBetweenLines = 15; // Distance in meters between the lines------------------------------------(ADJUST)
+float speedx = 0.0; // Calculated speed in km/h
+bool timingStarted = false; // Flag to indicate if the timer was started
 
-int CarCount = 0;//Variable para el conteo vehícular y posterior actualización del historial de velocidades en pantalla
+int CarCount = 0;//Variable for vehicle counting and subsequent updating of the speed history on the screen
 
 
-struct SpeedHistory {//----------Estructura para almacenamiento de la últimas 4 velocidades
+struct SpeedHistory {//----------Structure for storage of the last 4 speeds
     float speeds[6];
     uint8_t index;
 };
 
-SpeedHistory speedHistory = {{0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, 0}; // Inicializar el historial con ceros
+SpeedHistory speedHistory = {{0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, 0}; // Initialize history with zeros
 
 //-----------------------------------------------------------------------------------
 
 
 
-//----------------Estructura para el seguimiento de vehículos-----------------------------
+//----------------Vehicle tracking structure-----------------------------
 struct Vehicle {
     unsigned long startTime;
     bool timingStarted;
-    MP4Recording mp4; // Grabador MP4 para vehículo
-    MP4Recording mp4_2; //Grabador MP4 n2 para vehículo
+    MP4Recording mp4; // MP4 recorder for vehicle
+    MP4Recording mp4_2; //MP4 #2 recorder for vehicle
 };
 
-// Arreglo de vehículos
-Vehicle vehicles[20000];//------------------------------------------------------------(AJUSTAR)
-
+// Vehicle arrangement
+Vehicle vehicles[20000];
 
 int Nvh = 0;
 int Vhc = 0;
 
-
-
-// Variables booleanas para detección de velocidad de varios vehículos al tiempo
+// Boolean variables for speed detection of several vehicles at the same time
 bool flag = true;
 bool flag2= true;
 bool flag3= false;
-bool flag4= false;
 
+int TopSpeed = 30;// Maximum speed allowed in the area of interest-------------(ADJUST)
 
-int TopSpeed = 100;// Velocidad máxima permitida en el área de interés------------------------------(AJUSTARSE EN CASO DE SER UTILIZADA)
+float Tolerance = 0.2; //This variable is used to adjust the activation zones
 
-float Tolerance = 0.2; //Esta variable se utiliza para graduar las zonas de activación
+int NRV = 0; //Recorded vehicle number
 
-int NRV = 0; //Número de vehiculo grabado
-
-//Contadores para infraccciones 
+//Counters for violations
 int NVI = 1;
 int NI = 1;
 
-// Función para calcular la distancia entre dos puntos
+// Function to calculate the distance between two points
 float dist(int x, int y, int x1, int y1) {
     return sqrt(pow(x - x1, 2) + pow(y - y1, 2));
 }
 
-// Función para verificar si un punto está en una línea con una tolerancia dada
+// Function to check if a point is on a line with a given tolerance
 bool isPointOnLine(int px, int py, int x1, int y1, int x2, int y2, float tolerance) {
     float d1 = dist(px, py, x1, y1);
     float d2 = dist(px, py, x2, y2);
@@ -140,15 +134,13 @@ bool isPointOnLine(int px, int py, int x1, int y1, int x2, int y2, float toleran
     return (d1 + d2 <= lineLen + tolerance);
 }
 
-// Función para verificar si el centro del rectángulo toca una línea con una tolerancia dada
+// Function to check if the center of the rectangle touches a line with a given tolerance
 bool touchesLineCenter(int xmin, int ymin, int xmax, int ymax, int x1, int y1, int x2, int y2, float tolerance) {
     int centerX = (xmin + xmax) / 2;
     int centerY = (ymin + ymax) / 2;
 
     return isPointOnLine(centerX, centerY, x1, y1, x2, y2, tolerance);
 }
-
-
 
 void setup() {
     uint16_t im_h = config.height();
@@ -165,15 +157,11 @@ void setup() {
         Serial.print("Attempting to connect to WPA SSID: ");
         Serial.println(ssid);
         status = WiFi.begin(ssid, pass);
-
         // wait 2 seconds for connection:
         delay(2000);
     }
 
     ip = WiFi.localIP();
-
-    // Configure camera video channels with video format information
-    // Adjust the bitrate based on your WiFi network quality
     config.setBitrate(2 * 1024 * 1024);     // Recommend using 2Mbps for RTSP streaming to prevent network congestion
     Camera.configVideoChannel(CHANNEL, config);
     Camera.configVideoChannel(CHANNELNN, configNN);
@@ -222,8 +210,8 @@ void setup() {
 
 void loop() {
     
-    if (flag4){//----Activar la función de captura de imágen---
-      flag4=false;
+    if (flag3){//----Activate the image capture function---
+      flag3=false;
       CaptureImage();
       delay(100);
     } 
@@ -236,13 +224,9 @@ void ODPostProcess(std::vector<ObjectDetectionResult> results) {
     uint16_t im_w = config.width();
     
     OSD.createBitmap(CHANNEL);
-    //PlotLines();
+    // Draw simulated lines in OSD
     OSD.drawLine(CHANNEL, 325, line2_x2, 610, line2_y2, 2, OSD_COLOR_RED);
-    //OSD.drawLine(CHANNEL, 0,  ((line1_x1+line2_x2)/2), im_w, ((line1_y1+line2_y2)/2), 2, OSD_COLOR_GREEN);
     OSD.drawLine(CHANNEL, 310, line1_x1, 500, line1_y1, 2, OSD_COLOR_BLUE);
-    //OSD.drawLine(CHANNEL, 0, line2_x2+45, im_w, line2_y2+45, 2, OSD_COLOR_GREEN);
-
-    // Dibujar líneas simuladas en OSD
 
     if (ObjDet.getResultCount() > 0) {
         for (uint32_t i = 0; i < ObjDet.getResultCount(); i++) {
@@ -251,8 +235,8 @@ void ODPostProcess(std::vector<ObjectDetectionResult> results) {
                 ObjectDetectionResult item = results[i];
                 int xmin = (int)(item.xMin() * im_w);
                 int xmax = (int)(item.xMax() * im_w);
-                int ymin = ((int)(item.yMin() * im_h)) + 25;
-                int ymax = ((int)(item.yMax() * im_h)) + 25;
+                int ymin = ((int)(item.yMin() * im_h));
+                int ymax = ((int)(item.yMax() * im_h));
 
                 printf("Item %d %s:\t%d %d %d %d\n\r", i, itemList[obj_type].objectName, xmin, xmax, ymin, ymax);
                 OSD.drawRect(CHANNEL, xmin, ymin, xmax, ymax, 3, OSD_COLOR_WHITE);
@@ -264,7 +248,7 @@ void ODPostProcess(std::vector<ObjectDetectionResult> results) {
 
                 // Verificar si el punto toca la línea azul
                 if (touchesLineCenter(xmin, ymin, xmax, ymax, 0, line1_x1, im_w, line1_y1, Tolerance) && flag) {
-                    // Verificar si ha pasado la distancia mínima desde la última detección
+                    // Check if the minimum distance has passed since the last detection
 
                     vehicles[Nvh].startTime = 0;
                     vehicles[Nvh].timingStarted = false;
@@ -275,22 +259,22 @@ void ODPostProcess(std::vector<ObjectDetectionResult> results) {
                             NRV++;
            
                             if (NRV % 2 != 0) {
-                              // Este bloque de código se ejecutará solo si NVH es impar
+                              // This code block is executed only if Nvh is odd
                               vehicles[Nvh].mp4.configVideo(config);
-                              vehicles[Nvh].mp4.setRecordingFileName("Vehicle_Recording_" + String(NRV)); // Nombre base del archivo de grabación
-                              vehicles[Nvh].mp4.setRecordingDataType(STORAGE_VIDEO); // Grabar solo datos de video
+                              vehicles[Nvh].mp4.setRecordingFileName("Vehicle_Recording_" + String(NRV)); // Recording file base name
+                              vehicles[Nvh].mp4.setRecordingDataType(STORAGE_VIDEO); // Record only video data
                               videoStreamerMP4.registerInput(Camera.getStream(CHANNEL_MP4));                            
                               videoStreamerMP4.registerOutput(vehicles[Nvh].mp4);
                             } else {
-                              // Este bloque de código se ejecutará si NVH es par
+                              // This code block is executed only if Nvh is even
                               vehicles[Nvh].mp4_2.configVideo(config);
-                              vehicles[Nvh].mp4_2.setRecordingFileName("Vehicle_Recording_" + String(NRV)); // Nombre base del archivo de grabación
-                              vehicles[Nvh].mp4_2.setRecordingDataType(STORAGE_VIDEO); // Grabar solo datos de video
+                              vehicles[Nvh].mp4_2.setRecordingFileName("Vehicle_Recording_" + String(NRV)); // Recording file base name
+                              vehicles[Nvh].mp4_2.setRecordingDataType(STORAGE_VIDEO); // Record only video data
                               videoStreamerMP4_2.registerInput(Camera.getStream(CHANNEL_MP4_2));                            
                               videoStreamerMP4_2.registerOutput(vehicles[Nvh].mp4_2);
                             }
 
-                            if(NRV == 1){//Se ejecuta solo una vez para el canal NRV impar
+                            if(NRV == 1){//Runs only once for the odd NRV channel
                               if (videoStreamerMP4.begin() != 0) {
                                   Serial.println("StreamIO link start failed");
                               }
@@ -298,7 +282,7 @@ void ODPostProcess(std::vector<ObjectDetectionResult> results) {
                             Camera.channelBegin(CHANNEL_MP4);
                             }
 
-                            if(NRV == 2){//Se ejecuta solo una vez para el canal NRV par
+                            if(NRV == 2){//Runs only once for the even NRV channel
                               if (videoStreamerMP4_2.begin() != 0) {
                                   Serial.println("StreamIO link start failed");
                               }
@@ -311,8 +295,6 @@ void ODPostProcess(std::vector<ObjectDetectionResult> results) {
                             }else{
                               vehicles[Nvh].mp4_2.begin();
                             }
-                            
-                            //printInfo();
                             digitalWrite(GREEN_LED, HIGH);
 
                             Nvh++;
@@ -320,12 +302,12 @@ void ODPostProcess(std::vector<ObjectDetectionResult> results) {
                           flag = false; 
                     }
 
-                    if(touchesLineCenter(xmin, ymin, xmax, ymax, 0, ((line1_x1+line2_x2)/2), im_w, ((line1_y1+line2_y2)/2), 0.5) && !flag) {//Este condicional permite realizar la detección de velocidad de otro vehículo al tiempo
+                if(touchesLineCenter(xmin, ymin, xmax, ymax, 0, ((line1_x1+line2_x2)/2), im_w, ((line1_y1+line2_y2)/2), 0.5) && !flag) {//This conditional allows to detect the speed of another vehicle at the same time.
                           flag=true;
                           }
 
 
-                    // Calcular velocidad cuando el punto toca las línea roja
+                    // Calculate speed when the point touches the red line
                 if (touchesLineCenter(xmin, ymin, xmax, ymax, 0, line2_x2, im_w, line2_y2, Tolerance) && vehicles[Vhc].timingStarted && flag2) {
 
                     Serial.println("----Nvh----: ");
@@ -335,8 +317,8 @@ void ODPostProcess(std::vector<ObjectDetectionResult> results) {
                     Serial.println(Vhc);
                     endTime = millis();
                     CarCount++;
-                    float elapsedTime = (endTime - vehicles[Vhc].startTime) / 1000.0;  // Tiempo en segundos
-                    speedx = (distanceBetweenLines / elapsedTime) * 3.6;  // Velocidad en km/h
+                    float elapsedTime = (endTime - vehicles[Vhc].startTime) / 1000.0;  // Time in seconds
+                    speedx = (distanceBetweenLines / elapsedTime) * 3.6;  // Speed in km/h
                     digitalWrite(GREEN_LED, LOW);
       
                     if (CarCount == 7) {
@@ -349,7 +331,7 @@ void ODPostProcess(std::vector<ObjectDetectionResult> results) {
                       CarCount = 1;
                     }
                     
-                    // Actualizar el historial de velocidades
+                    // Update speed history
                     speedHistory.speeds[speedHistory.index] = speedx;
                     speedHistory.index = (speedHistory.index + 1) % 6;
                     
@@ -376,15 +358,14 @@ void ODPostProcess(std::vector<ObjectDetectionResult> results) {
 
                     Vhc++;
 
-                    if(speedx>TopSpeed){//--------------Almacenar imágen si se excede el límite de velocidad permitido en la zona--------------------
-                          Serial.println("- TOPE DE VELOCIDAD EXCEDIDA -");
-                          flag4=true;
+                    if(speedx>TopSpeed){//--------------Store image if the speed limit allowed in the area is exceeded--------------------
+                          Serial.println("- PERMITTED SPEED EXCEEDED -");
+                          flag3=true;
                           delay(100);
-                          //flag3=true;
-                          //RenameVideo();
+                          RenameVideo();
                           NI++;
                           }else{
-                            //DeleteVideo();
+                            DeleteVideo();
                           }
 
                     flag2 = false;
@@ -402,7 +383,7 @@ void ODPostProcess(std::vector<ObjectDetectionResult> results) {
 
 
 void SpeedHistory(){
-  // Mostrar la velocidad y el historial
+  // Show speed and history
     char speedText0[30];
     sprintf(speedText0, "--SPEED  HISTORY--");
     OSD.drawText(CHANNEL, 3, 10, speedText0, OSD_COLOR_YELLOW);
@@ -439,7 +420,7 @@ void SpeedHistory(){
   
 }
 
-void CaptureImage(){
+void CaptureImage(){//Function to capture and send the image of the moment of the violation to Google Drive
 
   // SD card init
         if (!fs.begin()) {
@@ -574,7 +555,7 @@ void CaptureImage(){
         }
 }
 
-void RenameVideo(){//Función para renombrar el archivo de video guardado en caso de cometer infracción de velocidad
+void RenameVideo(){//Function to rename the saved video file in case of committing a speed violation
     // SD card init
         if (!fs.begin()) {
             pinMode(LED_B, OUTPUT);
@@ -586,7 +567,6 @@ void RenameVideo(){//Función para renombrar el archivo de video guardado en cas
             while(1);
         }
   delay(250);
-  //bool rename(String(fs.getRootPath()) + "Vehicle_Recording_" + String(Vhc) + ".mp4", String(fs.getRootPath()) + "Speeding_Violation_Car_" + String(NI) + ".mp4");
   String filepath1 = String(fs.getRootPath()) + "Vehicle_Recording_" + String(Vhc) + ".mp4";
   String filepath_2 = String(fs.getRootPath()) + "Speeding_Violation_" + String(NI) + ".mp4";
   bool file1 = fs.rename(filepath1, filepath_2);
@@ -600,7 +580,7 @@ void RenameVideo(){//Función para renombrar el archivo de video guardado en cas
         delay(100);
 }
 
-void DeleteVideo(){//Función para eliminar el archivo de video guardado en caso de no cometer infracción de velocidad
+void DeleteVideo(){//Function to delete the saved video file in case of not committing speed violation
 
     // SD card init
         if (!fs.begin()) {
@@ -625,7 +605,6 @@ void DeleteVideo(){//Función para eliminar el archivo de video guardado en caso
         delay(100);
 
 }
-
 
 String urlencode(String str) {
     const char *msg = str.c_str();
