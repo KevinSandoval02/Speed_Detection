@@ -1,5 +1,5 @@
 # Descripción de la AMB82-MINI
-##AMB82-MINI
+## AMB82-MINI
 ![AMB82-MINI](https://github.com/KevinSandoval02/Speed_Detection/assets/104235535/51324c0c-405c-48ab-b07d-834e2ca1cd8b)
 
 Nota: Tomado de Ameba ARDUINO: Getting Started with AMB82 MINI (RTL8735B).
@@ -8,7 +8,7 @@ Disponible en: https://www.amebaiot.com/en/amebapro2-amb82-mini-arduino-getting-
 La placa de desarrollo AMB82-MINI, diseñada en base al SoC (System on Chip) Realtek RTL8735BDM, es una herramienta versátil destinada para simplificar la creación de aplicaciones de cámaras de red AI. A continuación, se amplía la información sobre sus características principales:
 - SoC altamente integrado: El RTL8735BDM cuenta con un SoC 8 en 1 con IA y NPU (unidad de procesamiento neuronal) integrados. Este chip tiene arquitectura ARMv8M y admite una velocidad de hasta 500 MHz, además permite aplicaciones de cámara de red AI con un consumo de energía extremadamente bajo.
 
-##Controlador principal RTL8735BDM.
+## Controlador principal RTL8735BDM.
 ![Controlador principal RTL8735BDM](https://github.com/KevinSandoval02/Speed_Detection/assets/104235535/fb8f5393-0e82-44ab-bbd1-40b70941bf2d)
 
 Nota: Tomado de Getting Started with Realtek AMB82-Mini IoT AI Camera Arduino Dev. Board
@@ -16,7 +16,7 @@ Disponible en: https://how2electronics.com/getting-started-with-realtek-amb82-mi
 
 - Cámara de alta calidad: Equipada con el módulo de cámara JXF37, la placa AMB82-MINI cuenta con una cámara de 5 megapíxeles y resolución Full HD CMOS con un sensor de 1920×1080 píxeles. Su amplio ángulo de visión de 130 grados y la compensación de tono y contraste permiten capturar imágenes nítidas y detalladas en una variedad de condiciones.
 
-##Módulo de cámara JXF37.
+## Módulo de cámara JXF37.
 ![Módulo de cámara JXF37](https://github.com/KevinSandoval02/Speed_Detection/assets/104235535/63046f8c-b944-4352-b686-14dfc8aa0965)
 
 Nota: Tomado de: Getting Started with Realtek AMB82-Mini IoT AI Camera Arduino Dev. Board
