@@ -40,12 +40,17 @@ La AMB82-MINI se distingue por las siguientes características adicionales:
 En resumen, la AMB82-MINI ofrece una solución integral para el desarrollo de aplicaciones de IoT y AI, combinando eficiencia energética, rendimiento de procesamiento avanzado, precio asequible y una amplia gama de características para satisfacer las necesidades de los desarrolladores en el campo de la visión artificial y el Internet de las cosas.
 
 **Pasos para configurar el entorno de desarrollo:**
+
 **Paso 1: Entorno del sistema operativo**
+
 La placa AMB82 Mini es compatible con varios sistemas operativos, incluidos Windows de 64 bits (Windows 10 y superior), Linux (Ubuntu 22 y superior) y MacOS (Intel y Apple Silicon). Se recomienda utilizar la última versión del sistema operativo para garantizar la compatibilidad y el rendimiento óptimo.
+
 **Paso 2:** Instalación del controlador
 Al conectar la placa AMB82 Mini a la computadora mediante un cable Micro USB, el controlador USB de la placa se instalará automáticamente en la mayoría de los casos. En caso de problemas con el controlador, se puede descargar desde el sitio web oficial del fabricante.
+
 **Paso 3:** Configuración de Arduino IDE
 Arduino IDE es una herramienta de desarrollo ampliamente utilizada que admite hardware de terceros, incluida la placa AMB82 Mini. A fin de configurar Arduino IDE para el desarrollo en la placa se siguen estos pasos:
+
 **1.**	Descargar Arduino IDE desde el sitio web oficial de Arduino.
 **2.**	Abrir Arduino IDE e ir a "Archivo" -> "Preferencias".
 **3.**	Pegar la siguiente URL “https://github.com/ambiot/ambpro2_arduino/raw/main/Arduino_package/package_realtek_amebapro2_index.json”.
@@ -53,6 +58,7 @@ Arduino IDE es una herramienta de desarrollo ampliamente utilizada que admite ha
 **5.**	Hacer clic en "Instalar" y esperar a que se descarguen los archivos necesarios.
 **6.**	Seleccionar la placa AMB82 Mini en "Herramientas" -> "Board" -> "AmebaPro2 ARM (32-bits) Boards" -> "AMB82-MINI".
 Con estos pasos, el entorno de desarrollo estará configurado para comenzar a desarrollar aplicaciones para la placa AMB82 Mini.
+
 
 **Integración del modelo de YOLO v4 Tiny en la placa AMB82 Mini**
 **1.	Entrenamiento del modelo y extracción de archivos .cfg y .weights:**
