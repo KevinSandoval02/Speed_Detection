@@ -39,3 +39,46 @@ La AMB82-MINI se distingue por las siguientes características adicionales:
 
 En resumen, la AMB82-MINI ofrece una solución integral para el desarrollo de aplicaciones de IoT y AI, combinando eficiencia energética, rendimiento de procesamiento avanzado, precio asequible y una amplia gama de características para satisfacer las necesidades de los desarrolladores en el campo de la visión artificial y el Internet de las cosas.
 
+**Pasos para configurar el entorno de desarrollo:**
+**Paso 1: Entorno del sistema operativo**
+La placa AMB82 Mini es compatible con varios sistemas operativos, incluidos Windows de 64 bits (Windows 10 y superior), Linux (Ubuntu 22 y superior) y MacOS (Intel y Apple Silicon). Se recomienda utilizar la última versión del sistema operativo para garantizar la compatibilidad y el rendimiento óptimo.
+**Paso 2:** Instalación del controlador
+Al conectar la placa AMB82 Mini a la computadora mediante un cable Micro USB, el controlador USB de la placa se instalará automáticamente en la mayoría de los casos. En caso de problemas con el controlador, se puede descargar desde el sitio web oficial del fabricante.
+**Paso 3:** Configuración de Arduino IDE
+Arduino IDE es una herramienta de desarrollo ampliamente utilizada que admite hardware de terceros, incluida la placa AMB82 Mini. A fin de configurar Arduino IDE para el desarrollo en la placa se siguen estos pasos:
+**1.**	Descargar Arduino IDE desde el sitio web oficial de Arduino.
+**2.**	Abrir Arduino IDE e ir a "Archivo" -> "Preferencias".
+**3.**	Pegar la siguiente URL “https://github.com/ambiot/ambpro2_arduino/raw/main/Arduino_package/package_realtek_amebapro2_index.json”.
+**4.**	Ir a "Herramientas" -> "Tablero" -> "Administrador de tableros" y buscar "Realtek Ameba Boards" en la lista.
+**5.**	Hacer clic en "Instalar" y esperar a que se descarguen los archivos necesarios.
+**6.**	Seleccionar la placa AMB82 Mini en "Herramientas" -> "Board" -> "AmebaPro2 ARM (32-bits) Boards" -> "AMB82-MINI".
+Con estos pasos, el entorno de desarrollo estará configurado para comenzar a desarrollar aplicaciones para la placa AMB82 Mini.
+
+**Integración del modelo de YOLO v4 Tiny en la placa AMB82 Mini**
+**1.	Entrenamiento del modelo y extracción de archivos .cfg y .weights:**
+•	Se entrena el modelo YOLO v4 Tiny utilizando una base de imágenes recolectada previamente.
+•	Una vez entrenado el modelo, se generan los archivos .cfg y .weights, que contienen la arquitectura de la red neuronal y los pesos aprendidos, respectivamente.
+**2.	Acceso a la página de conversión de modelos:**
+•	Se accede a la página oficial de AMB82-MINI, específicamente al apartado dedicado a la conversión de modelos AI. La URL de acceso es https://www.amebaiot.com/en/amebapro2-ai-convert-model/.
+**3.	Conversión del modelo:**
+•	En la página web mencionada, se completan varios campos obligatorios:
+•	Se proporciona una dirección de correo electrónico para recibir el enlace de descarga del archivo convertido.
+•	Se selecciona el tipo de modelo, en este caso, YOLO-TINY.
+•	Se elige el tipo de cuantización, siendo UINT8 una opción común.
+•	Se carga un archivo ZIP que incluye el archivo .cfg y el archivo .weights.
+•	Se carga al menos una imagen JPEG para fines de cuantización.
+•	Una vez cargados todos los archivos requeridos, se envía la solicitud.
+**4.	Recepción del archivo convertido:**
+•	Después de enviar la solicitud, se recibe un correo electrónico con un enlace de descarga.
+•	Al hacer clic en el enlace, se descarga un archivo llamado network_binary.nb.
+**5.	Renombrar y reemplazar el archivo convertido:**
+•	Se renombra el archivo network_binary.nb a yolov4_tiny.nb.
+•	Este archivo renombrado se reemplaza en la ruta específica del sistema operativo, que en este caso es: C:\Users\User\AppData\Local\Arduino15\packages\realtek\hardware\AmebaPro2\4.0.5\variants\common_nn_models.
+**6.	Ajuste del archivo ObjectClassList.h:**
+•	Se abre el archivo ObjectClassList.h, que es un archivo de encabezado en formato C. En este archivo, se ajusta el código para reflejar el número de clases que el modelo identificará y el nombre de cada clase.
+•	Se asegura de que el número de clases y los nombres coincidan con los resultados de la capacitación del modelo.
+•	El archivo ObjectClassList.h se guarda con los cambios realizados.
+**7.	Prueba del modelo en la placa AMB82 Mini:**
+•	Con todos los pasos anteriores completados, el modelo YOLO v4 Tiny está listo para ser cargado y ejecutado en la placa AMB82 Mini.
+•	Se carga el código ejecutable Arduino junto con el archivo de clases actualizado en la placa, ambos deben estar guardado en la misma ruta.
+Este proceso asegura que el modelo YOLO v4 Tiny esté completamente integrado y funcional en la placa AMB82 Mini, lo que permite su implementación en aplicaciones de detección de objetos en tiempo real.
