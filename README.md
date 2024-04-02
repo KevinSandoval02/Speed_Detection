@@ -120,3 +120,8 @@ Con estos pasos, el entorno de desarrollo estará configurado para comenzar a de
 
 •	Se carga el código ejecutable Arduino junto con el archivo de clases actualizado en la placa, ambos deben estar guardado en la misma ruta.
 Este proceso asegura que el modelo YOLO v4 Tiny esté completamente integrado y funcional en la placa AMB82 Mini, lo que permite su implementación en aplicaciones de detección de objetos en tiempo real.
+
+
+
+# Dataset
+- https://drive.google.com/drive/folders/14F2FvHScWwpUnKARl2jV2hscndO90S94?usp=sharing
