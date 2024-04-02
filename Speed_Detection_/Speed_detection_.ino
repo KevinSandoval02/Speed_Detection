@@ -389,7 +389,7 @@ void SpeedHistory(){
     OSD.drawText(CHANNEL, 3, 10, speedText0, OSD_COLOR_YELLOW);
 
     char speedText00[30];
-    sprintf(speedText00, "---LASTEST CARS---");
+    sprintf(speedText00, "---LATEST CARS---");
     OSD.drawText(CHANNEL, 3, 35, speedText00, OSD_COLOR_YELLOW);
 
     char speedText1[30];
