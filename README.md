@@ -125,6 +125,8 @@ Este proceso asegura que el modelo YOLO v4 Tiny esté completamente integrado y 
 
 # Dataset
 ## Fotogramas extraídos (1.942)
-Link= https://drive.google.com/drive/folders/10hQ8nfDVo2Ck9GHXqOT_V2CleYAyBXKl?usp=sharing
+Link: https://drive.google.com/drive/folders/10hQ8nfDVo2Ck9GHXqOT_V2CleYAyBXKl?usp=sharing
 ## Imágenes etiquetadas en Roboflow (1.942)
-Link ()https://app.roboflow.com/setdedatos/data_cars_d/browse?queryText=&pageSize=50&startingIndex=0&browseQuery=true
+Link: https://app.roboflow.com/setdedatos/data_cars_d/browse?queryText=&pageSize=50&startingIndex=0&browseQuery=true
+## Imágenes etiquetadas en formato YOLO (4000 y algo)
+Link: https://drive.google.com/drive/folders/14F2FvHScWwpUnKARl2jV2hscndO90S94?usp=sharing
