@@ -39,6 +39,16 @@ La AMB82-MINI se distingue por las siguientes características adicionales:
 
 En resumen, la AMB82-MINI ofrece una solución integral para el desarrollo de aplicaciones de IoT y AI, combinando eficiencia energética, rendimiento de procesamiento avanzado, precio asequible y una amplia gama de características para satisfacer las necesidades de los desarrolladores en el campo de la visión artificial y el Internet de las cosas.
 
+# Dataset
+## Fotogramas extraídos (1.942)
+Link: https://drive.google.com/drive/folders/10hQ8nfDVo2Ck9GHXqOT_V2CleYAyBXKl?usp=sharing
+## Imágenes etiquetadas en Roboflow (1.942)
+Link: https://app.roboflow.com/setdedatos/data_cars_d/browse?queryText=&pageSize=50&startingIndex=0&browseQuery=true
+## Imágenes etiquetadas en formato YOLO (4000 y algo)
+Link: https://drive.google.com/drive/folders/14F2FvHScWwpUnKARl2jV2hscndO90S94?usp=sharing
+# Entrenamiento de YOLOv4 Tiny
+Train YOLOv4 Tiny Colab Notebook: https://colab.research.google.com/drive/1Bta3F2dt90FczyhJYJ0oySlgJlrVNqmN?usp=sharing
+
 ## Pasos para configurar el entorno de desarrollo:
 
 **Paso 1: Entorno del sistema operativo**
@@ -123,12 +133,4 @@ Este proceso asegura que el modelo YOLO v4 Tiny esté completamente integrado y 
 
 
 
-# Dataset
-## Fotogramas extraídos (1.942)
-Link: https://drive.google.com/drive/folders/10hQ8nfDVo2Ck9GHXqOT_V2CleYAyBXKl?usp=sharing
-## Imágenes etiquetadas en Roboflow (1.942)
-Link: https://app.roboflow.com/setdedatos/data_cars_d/browse?queryText=&pageSize=50&startingIndex=0&browseQuery=true
-## Imágenes etiquetadas en formato YOLO (4000 y algo)
-Link: https://drive.google.com/drive/folders/14F2FvHScWwpUnKARl2jV2hscndO90S94?usp=sharing
-# Entrenamiento de YOLOv4 Tiny
-Train YOLOv4 Tiny Colab Notebook: https://colab.research.google.com/drive/1Bta3F2dt90FczyhJYJ0oySlgJlrVNqmN?usp=sharing
+
