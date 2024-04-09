@@ -40,11 +40,11 @@ La AMB82-MINI se distingue por las siguientes características adicionales:
 En resumen, la AMB82-MINI ofrece una solución integral para el desarrollo de aplicaciones de IoT y AI, combinando eficiencia energética, rendimiento de procesamiento avanzado, precio asequible y una amplia gama de características para satisfacer las necesidades de los desarrolladores en el campo de la visión artificial y el Internet de las cosas.
 
 # Dataset
-## Fotogramas extraídos (2.300)
+## Fotogramas extraídos (2.051)
 Link: https://drive.google.com/drive/folders/10hQ8nfDVo2Ck9GHXqOT_V2CleYAyBXKl?usp=sharing
-## Imágenes etiquetadas en Roboflow (2.300)
+## Imágenes etiquetadas en Roboflow (2.051)
 Link: https://app.roboflow.com/setdedatos/data_cars_d/browse?queryText=&pageSize=50&startingIndex=0&browseQuery=true
-## Imágenes etiquetadas en formato YOLO (4000 y algo)
+## Imágenes etiquetadas en formato YOLO (4929)
 Link: https://drive.google.com/drive/folders/14F2FvHScWwpUnKARl2jV2hscndO90S94?usp=sharing
 
 # Entrenamiento de YOLOv4 Tiny
