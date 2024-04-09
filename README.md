@@ -49,7 +49,9 @@ Link: https://drive.google.com/drive/folders/14F2FvHScWwpUnKARl2jV2hscndO90S94?u
 
 # Entrenamiento de YOLOv4 Tiny
 Train YOLOv4 Tiny Colab Notebook: https://colab.research.google.com/drive/1Bta3F2dt90FczyhJYJ0oySlgJlrVNqmN?usp=sharing
+
 Luego de entrenarse el modelo, se generan los archivos de los pesos (.weights) y el de configuración (.cfg), se seleccionó el archivo **custom-yolov4-tiny-detector_best.weights** y el archivo **custom-yolov4-tiny-detector.cfg**.
+
 Archivos de pesos y configuración: https://drive.google.com/drive/folders/19gS7S1jcr8QG-PekcEJFxwaULLCxPw7S?usp=sharing
 
 ## Pasos para configurar el entorno de desarrollo:
