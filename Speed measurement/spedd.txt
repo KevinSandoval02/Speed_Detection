@@ -1,1 +1,0 @@
-speed, acá va el archivo de arduino o el código completo 
