@@ -124,4 +124,4 @@ Este proceso asegura que el modelo YOLO v4 Tiny esté completamente integrado y 
 
 
 # Dataset
-- Fotogramas extraídos: https://drive.google.com/drive/folders/14F2FvHScWwpUnKARl2jV2hscndO90S94?usp=sharing
+- Fotogramas extraídos: https://drive.google.com/drive/folders/10hQ8nfDVo2Ck9GHXqOT_V2CleYAyBXKl?usp=sharing
