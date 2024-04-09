@@ -115,6 +115,9 @@ Con estos pasos, el entorno de desarrollo estará configurado para comenzar a de
 
 •	Al hacer clic en el enlace, se descarga un archivo llamado network_binary.nb.
 
+## Modelo obtenido
+•	Archivo del modelo YOLOv4 Tiny personalizado: https://drive.google.com/drive/folders/1c3qgQ-yhb5WAtNNx5YPxl-rtV5B41K-I?usp=sharing 
+
 
 **5.	Renombrar y reemplazar el archivo convertido:**
 
