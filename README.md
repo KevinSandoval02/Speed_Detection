@@ -46,8 +46,11 @@ Link: https://drive.google.com/drive/folders/10hQ8nfDVo2Ck9GHXqOT_V2CleYAyBXKl?u
 Link: https://app.roboflow.com/setdedatos/data_cars_d/browse?queryText=&pageSize=50&startingIndex=0&browseQuery=true
 ## Imágenes etiquetadas en formato YOLO (4000 y algo)
 Link: https://drive.google.com/drive/folders/14F2FvHScWwpUnKARl2jV2hscndO90S94?usp=sharing
+
 # Entrenamiento de YOLOv4 Tiny
 Train YOLOv4 Tiny Colab Notebook: https://colab.research.google.com/drive/1Bta3F2dt90FczyhJYJ0oySlgJlrVNqmN?usp=sharing
+Luego de entrenarse el modelo, se generan los archivos de los pesos (.weights) y el de configuración (.cfg), se seleccionó el archivo **custom-yolov4-tiny-detector_best.weights** y el archivo **custom-yolov4-tiny-detector.cfg**.
+Archivos de pesos y configuración: https://drive.google.com/drive/folders/19gS7S1jcr8QG-PekcEJFxwaULLCxPw7S?usp=sharing
 
 ## Pasos para configurar el entorno de desarrollo:
 
@@ -109,6 +112,7 @@ Con estos pasos, el entorno de desarrollo estará configurado para comenzar a de
 •	Después de enviar la solicitud, se recibe un correo electrónico con un enlace de descarga.
 
 •	Al hacer clic en el enlace, se descarga un archivo llamado network_binary.nb.
+
 
 **5.	Renombrar y reemplazar el archivo convertido:**
 
