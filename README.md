@@ -50,7 +50,8 @@ Link: https://drive.google.com/drive/folders/14F2FvHScWwpUnKARl2jV2hscndO90S94?u
 # Entrenamiento de YOLOv4 Tiny
 Train YOLOv4 Tiny Colab Notebook used: https://colab.research.google.com/drive/1Bta3F2dt90FczyhJYJ0oySlgJlrVNqmN?usp=sharing
 
-Código de entrenamiento original (Tutorial) YOLOv4-tiny Colab Notebook provided by:
+Código de entrenamiento original (Tutorial) YOLOv4-tiny Colab Notebook: https://colab.research.google.com/drive/1PWOwg038EOGNddf6SXDG5AsC8PIcAe-G?ref=blog.roboflow.com#scrollTo=NjKzw2TvZrOQ
+Provided by:
 > Jacob Solawetz, Samrat Sahoo. (Jul 1, 2020). Train YOLOv4-tiny on Custom Data - Lightning Fast Object Detection. Roboflow Blog: https://blog.roboflow.com/train-yolov4-tiny-on-custom-data-lighting-fast-detection/
 
 
