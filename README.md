@@ -85,7 +85,7 @@ Arduino IDE es una herramienta de desarrollo ampliamente utilizada que admite ha
 
 Con estos pasos, el entorno de desarrollo estará configurado para comenzar a desarrollar aplicaciones para la placa AMB82 Mini.
 
-Tutorial básico:
+### Tutorial básico:
 Empezando con la AMB82 MINI | Ejemplo de detección de objetos con alarma luminosa (Un LED)
 Link: http://www.youtube.com/watch?v=gpG8Wz6KV4Y
 
