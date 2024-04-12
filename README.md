@@ -48,7 +48,7 @@ Link: https://app.roboflow.com/setdedatos/data_cars_d/browse?queryText=&pageSize
 Link: https://drive.google.com/drive/folders/14F2FvHScWwpUnKARl2jV2hscndO90S94?usp=sharing
 
 # Entrenamiento de YOLOv4 Tiny
-Train YOLOv4 Tiny Colab Notebook used: https://colab.research.google.com/drive/1Bta3F2dt90FczyhJYJ0oySlgJlrVNqmN?usp=sharing
+Train YOLOv4 Tiny Colab Notebook used: https://colab.research.google.com/drive/1slNnb0oj3OqJyAGA60Vr32yyOHOG3RNR?usp=sharing
 
 Código de entrenamiento original (Tutorial) YOLOv4-tiny Colab Notebook: https://colab.research.google.com/drive/1PWOwg038EOGNddf6SXDG5AsC8PIcAe-G?ref=blog.roboflow.com#scrollTo=NjKzw2TvZrOQ
 Provided by:
